@@ -1,0 +1,85 @@
+
+mysql> create aution_database;
+
+mysql> create table Buyer
+    -> (
+    -> B_id int primary key,
+    -> B_name varchar(255),
+    -> B_email varchar(255),
+    -> B_password varchar(255)
+    -> );
+	 ===========================================================
+	mysql> desc Buyer;
+	+------------+--------------+------+-----+---------+-------+
+	| Field      | Type         | Null | Key | Default | Extra |
+	+------------+--------------+------+-----+---------+-------+
+	| B_id       | int          | NO   | PRI | NULL    |       |
+	| B_name     | varchar(255) | YES  |     | NULL    |       |
+	| B_email    | varchar(255) | YES  |     | NULL    |       |
+	| B_password | varchar(255) | YES  |     | NULL    |       |
+	+------------+--------------+------+-----+---------+-------+
+	4 rows in set (0.02 sec)
+
+	 ===========================================================
+	 
+mysql> create table Seller
+    -> (
+    -> S_id int primary key,
+    -> S_name varchar(255),
+    -> S_email varchar(255),
+    -> S_password varchar(255)
+    -> );
+	 
+	  ===========================================================   
+	mysql> desc Seller;
+	+------------+--------------+------+-----+---------+-------+
+	| Field      | Type         | Null | Key | Default | Extra |
+	+------------+--------------+------+-----+---------+-------+
+	| S_id       | int          | NO   | PRI | NULL    |       |
+	| S_name     | varchar(255) | YES  |     | NULL    |       |
+	| S_email    | varchar(255) | YES  |     | NULL    |       |
+	| S_password | varchar(255) | YES  |     | NULL    |       |
+	+------------+--------------+------+-----+---------+-------+
+	4 rows in set (0.00 sec)
+	 ===========================================================
+mysql> create table Product
+	-> (
+	-> P_id int primary key,
+	-> P_name varchar(255), 
+	-> P_price int, 
+	-> P_quantity int,
+	-> P_categort varchar(255),
+	-> Seller_Id int,
+	-> Foreign Key(Seller_Id) references Seller(S_id)
+	-> );
+	 ===========================================================
+	mysql> desc Product;
+	+------------+--------------+------+-----+---------+-------+
+	| Field      | Type         | Null | Key | Default | Extra |
+	+------------+--------------+------+-----+---------+-------+
+	| P_id       | int          | NO   | PRI | NULL    |       |
+	| P_name     | varchar(255) | YES  |     | NULL    |       |
+	| P_price    | int          | YES  |     | NULL    |       |
+	| P_quantity | int          | YES  |     | NULL    |       |
+	| P_categort | varchar(255) | YES  |     | NULL    |       |
+	| Seller_Id  | int          | YES  | MUL | NULL    |       |
+	+------------+--------------+------+-----+---------+-------+
+	6 rows in set (0.00 sec)
+	 ===========================================================
+mysql> Create table Sold
+	-> (
+	-> Buyer_id int,
+	-> Item_Id int,
+	-> Foreign Key(Buyer_Id) references Buyer(B_id),
+	-> Foreign Key(Item_Id) references Product(P_ID)
+	-> );
+	 ===========================================================
+	mysql> desc Sold;
+	+----------+------+------+-----+---------+-------+
+	| Field    | Type | Null | Key | Default | Extra |
+	+----------+------+------+-----+---------+-------+
+	| Buyer_id | int  | YES  | MUL | NULL    |       |
+	| Item_Id  | int  | YES  | MUL | NULL    |       |
+	+----------+------+------+-----+---------+-------+
+	2 rows in set (0.00 sec)
+	 ===========================================================
