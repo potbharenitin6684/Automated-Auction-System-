@@ -4,19 +4,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.masai.bean.Buyer;
 import com.masai.bean.Seller;
 import com.masai.utility.DButility;
 
-public class AdminDAOImpl implements AdminDAO{
-
+public class AdminDAOImpl implements AdminDAO
+{
 	@Override
-	public Buyer getBuyer() {
+	public Buyer getBuyer() 
+	{
 		Buyer b = null;
 		
-		try(Connection conn = DButility.provideConnection()) {
-			
+		try(Connection conn = DButility.provideConnection()) 
+		{	
 			PreparedStatement ps=  conn.prepareStatement("select * from Buyer");
 			
 			ResultSet rs =  ps.executeQuery();
@@ -38,23 +38,23 @@ public class AdminDAOImpl implements AdminDAO{
 //				
 //				System.out.println("=============================");
 				
-				
 			}
 			
 		}
-		catch(SQLException e){
+		catch(SQLException e)
+		{
 			e.printStackTrace();
 		}
-		
 		return b;
 	}
 
 	@Override
-	public Seller getSeller() {
+	public Seller getSeller() 
+	{
 		Seller s = null;
 		
-	try(Connection conn = DButility.provideConnection()) {
-			
+	try(Connection conn = DButility.provideConnection())
+	{
 			PreparedStatement ps=  conn.prepareStatement("select * from Seller");
 			
 			ResultSet rs =  ps.executeQuery();
@@ -65,23 +65,18 @@ public class AdminDAOImpl implements AdminDAO{
 				String name= rs.getString("S_name");
 				String email = rs.getString("S_email");
 				String password = rs.getString("S_password");
-				
-				
-				
-				
+
 				s = new Seller(id, name, email, password);
 				
-//				System.out.println("=============================");
-				
-				
+//				System.out.println("=============================");	
 			}
 			
 		}
-		catch(SQLException e){
+		catch(SQLException e)
+		{
 			e.printStackTrace();
 		}
 		
 		return s;
 	}
-
 }

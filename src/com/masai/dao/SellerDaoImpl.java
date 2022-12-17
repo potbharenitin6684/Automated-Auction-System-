@@ -9,20 +9,15 @@ import com.masai.bean.Product;
 import com.masai.bean.Seller;
 import com.masai.utility.DButility;
 
-public class SellerDAOImpl implements SellerDAO{
-
+public class SellerDAOImpl implements SellerDAO
+{
 	@Override
-	public String registerSeller(Seller seller) {
+	public String registerSeller(Seller seller) 
+	{
 		String message = "Not Inserted..";
-	
-		
-	
-		
-		try(Connection conn= DButility.provideConnection()) {
-			
+		try(Connection conn= DButility.provideConnection()) 
+		{
 			PreparedStatement ps= conn.prepareStatement("insert into Seller values(?,?,?,?)");
-			
-			
 			
 			ps.setInt(1, seller.getId());
 			ps.setString(2, seller.getName());
@@ -31,30 +26,24 @@ public class SellerDAOImpl implements SellerDAO{
 			
 			int x= ps.executeUpdate();
 			
-			
 			if(x > 0)
 				message = "Seller Registered Sucessfully !";
 			
-			
-			
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			message = e.getMessage();
 		}
-		
-		
-	
-	
-		
 		return message;
-	
 	}
 
 	@Override
-	public String ProductList(Product p) {
+	public String ProductList(Product p) 
+	{
 		String message = "NOT INSERTED..";
 //		logic
-		try (Connection conn = DButility.provideConnection()) {
-
+		try (Connection conn = DButility.provideConnection()) 
+		{
 			PreparedStatement ps = conn
 					.prepareStatement("insert into Product values(?,?,?,?,?,?);");
 			ps.setInt(1, p.getId());
@@ -69,72 +58,71 @@ public class SellerDAOImpl implements SellerDAO{
 			if (x > 0)
 				message = "Item successfully listed";
 
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			e.getMessage();
-
 		}
-
 		return message;
 	}
 
 	@Override
-	public String updateproduct(Product p, String  P_name) {
+	public String updateproduct(Product p, String  P_name) 
+	{
 		String message = "NOT UPDATED..";
 //		logic
-		try (Connection conn = DButility.provideConnection()) {
-
+		try (Connection conn = DButility.provideConnection())
+		{
 			PreparedStatement ps = conn.prepareStatement("update Product Set P_name = ?,P_price = ?, P_quantity = ?, P_categort = ?  Where P_name = ?;");
 			ps.setString(1, p.getName());
 			ps.setInt(2, p.getPrice());
 			ps.setInt(3, p.getQuantity());
 			ps.setString(4, p.getCategory());
 			ps.setString(5, P_name);
-			
 
 			int x = ps.executeUpdate();// Check this
 
 			if (x > 0)
 				message = "Item updated successfully";
 
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			e.getMessage();
-
 		}
 
 		return message;
 	}
 
 	@Override
-	public String DeleteProduct(String P_name) {
+	public String DeleteProduct(String P_name)
+	{
 		String message = "Instruction Failed";
 		
-		try (Connection conn = DButility.provideConnection()) {
-
+		try (Connection conn = DButility.provideConnection()) 
+		{
 			PreparedStatement ps = conn.prepareStatement("Delete  From Product Where P_name = ?;");
 			ps.setString(1, P_name);
-			
-
 			int x = ps.executeUpdate();// Check this
 
 			if (x > 0)
 				message = "Product Delected successfully";
 
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			e.getMessage();
-
 		}
-		
-		
-		
 		return message;
 	}
 
 	@Override
-	public String AddProduct(Product P) {
+	public String AddProduct(Product P) 
+	{
 		String message = "NOT INSERTED..";
 //		logic
-		try (Connection conn = DButility.provideConnection()) {
-
+		try (Connection conn = DButility.provideConnection()) 
+		{
 			PreparedStatement ps = conn
 					.prepareStatement("insert into Product values(?,?,?,?,?,?);");
 			ps.setInt(1, P.getId());
@@ -149,22 +137,21 @@ public class SellerDAOImpl implements SellerDAO{
 			if (x > 0)
 				message = "Item successfully listed";
 
-		} catch (SQLException e) {
-			e.getMessage();
-
 		}
-
+		catch (SQLException e) 
+		{
+			e.getMessage();
+		}
 		return message;
 	}
 
 	@Override
-	public Product SoldHistory() {
+	public Product SoldHistory() 
+	{
 		Product p = null;
-		try(Connection conn = DButility.provideConnection()) {
-			
+		try(Connection conn = DButility.provideConnection()) 
+		{
 			PreparedStatement ps=  conn.prepareStatement("select * from Product Inner Join Sold on  Product.P_id = Sold.Item_id");
-			
-			
 			ResultSet rs =  ps.executeQuery();
 			
 			while(rs.next()) 
@@ -175,27 +162,14 @@ public class SellerDAOImpl implements SellerDAO{
 				int quantity = rs.getInt("P_quantity");
 				String category = rs.getString("P_categort");
 				int seller_id = rs.getInt("Seller_Id");
-				
-				
-				
-				
 				p = new Product(id, name, price, quantity, category, seller_id);
-			
-				
-				
 			}
-			
 		}
-		catch(SQLException e){
+		catch(SQLException e)
+		{
 			e.printStackTrace();
 		}
 		
 		return p;
 	}
-	
-	
-	
-	
-	
-
 }
