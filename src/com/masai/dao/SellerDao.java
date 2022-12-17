@@ -1,19 +1,20 @@
 package com.masai.dao;
 
-import java.util.List;
+import com.masai.bean.Product;
+import com.masai.bean.Seller;
 
-import com.masai.model.Product;
-import com.masai.model.Seller;
-
-public interface SellerDao 
+public interface SellerDAO 
 {
-	  public String RegisterSeller(Seller seller);
-	    
-		public List<Seller> getSeller()throws SellerException;
-		
-		public String ProductList(Product p);
-		
-		public String Updateproduct(Product p ,int id);
-		
-		public String DeleteProduct(Product p, int id);
+	public String registerSeller(Seller seller);
+	
+	public String ProductList(Product p);
+	
+	public String updateproduct(Product p ,String P_name);
+	
+	public String DeleteProduct(String P_name);
+	
+	public String AddProduct(Product P);
+	
+	public  Product SoldHistory();
+
 }

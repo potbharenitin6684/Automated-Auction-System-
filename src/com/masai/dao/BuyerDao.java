@@ -1,12 +1,16 @@
 package com.masai.dao;
 
-import java.util.List;
+import com.masai.bean.Buyer;
+import com.masai.bean.Product;
 
-import com.masai.model.Buyer;
-
-public interface BuyerDao
-{
-	public String RegisterBuyer(Buyer buyer);
+public interface BuyerDAO 
+{	
+	public String registerBuyer(Buyer buyer);
 	
-	public List<Buyer> getBuyer()throws BuyerException;
+	public Product viewItemByCatagory(String catagory);
+	
+	public Product SellersByCatagory(String catagory);
+
+	public String Buy(String Buyer_email , String Product_Name);
+	
 }
