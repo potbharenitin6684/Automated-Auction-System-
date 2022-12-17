@@ -21,8 +21,8 @@ public class Main {
 		System.out.println("Welcome to Automated Auction System");
 		
 		
-		String admin_Login = "root";
-		String password = "root";
+		String admin_Login = "Nitin";
+		String password = "Nitin";
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -109,8 +109,6 @@ public class Main {
 				new BuyItem().main(args);
 			else 
 				return;
-
-			
 		}
 		else return;
 		
