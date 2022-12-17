@@ -88,6 +88,9 @@ public class Main {
 		}
 		else if (c==3)
 		{
+			
+			
+			
 			System.out.println("1. Register as Buyer.");
 			System.out.println("2. Search and view Items by category.");
 			System.out.println("3. Select and view all the seller and also their Items category wise.");
